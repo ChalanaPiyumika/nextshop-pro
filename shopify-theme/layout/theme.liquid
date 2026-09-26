@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ page_title }}{% unless page_title contains shop.name %} – {{ shop.name }}{% endunless %}</title>
+  {% if page_description %}<meta name="description" content="{{ page_description | escape }}">{% endif %}
+  {% if settings.favicon %}<link rel="icon" href="{{ settings.favicon | image_url: width: 64 }}">{% endif %}
+  <link rel="canonical" href="{{ canonical_url }}">
+  {{ settings.heading_font | font_face: font_display: 'swap' }}
+  {{ settings.body_font | font_face: font_display: 'swap' }}
+  <style>
+    :root{
+      --c-bg:{{ settings.color_background }};--c-fg:{{ settings.color_text }};
+      --c-accent:{{ settings.color_accent }};--c-muted:{{ settings.color_muted }};
+      --c-btn:{{ settings.color_button }};--c-btn-fg:{{ settings.color_button_text }};
+      --f-head:{{ settings.heading_font.family }},{{ settings.heading_font.fallback_families }};
+      --f-body:{{ settings.body_font.family }},{{ settings.body_font.fallback_families }};
+      --radius:{{ settings.button_radius }}px;--page:{{ settings.page_width }}px;
+    }
+  </style>
+  {{ 'base.css' | asset_url | stylesheet_tag }}
+  {{ content_for_header }}
+</head>
+<body>
+  {% sections 'header-group' %}
+  <main id="main">{{ content_for_layout }}</main>
+  {% sections 'footer-group' %}
+  {% render 'cart-drawer' %}
+  <script src="{{ 'theme.js' | asset_url }}" defer></script>
+</body>
+</html>

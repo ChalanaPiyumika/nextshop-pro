@@ -1,0 +1,8 @@
+const drawer=document.getElementById('CartDrawer');
+function openCart(){drawer&&drawer.classList.add('open')}function closeCart(){drawer&&drawer.classList.remove('open')}
+document.addEventListener('click',e=>{if(e.target.closest('[data-cart-open]')){e.preventDefault();refreshCart().then(openCart)}if(e.target.closest('[data-cart-close]'))closeCart()});
+async function refreshCart(){const r=await fetch('/?section_id=cart-drawer-content');const t=await r.text();const d=new DOMParser().parseFromString(t,'text/html');const n=d.querySelector('#CartDrawerInner');const c=document.getElementById('CartDrawerInner');if(n&&c)c.innerHTML=n.innerHTML;const cart=await (await fetch('/cart.js')).json();document.querySelectorAll('[data-cart-count]').forEach(el=>el.textContent=cart.item_count)}
+document.addEventListener('submit',async e=>{const f=e.target.closest('form[action$="/cart/add"]');if(!f)return;e.preventDefault();const b=f.querySelector('[type=submit]');b&&(b.disabled=true);
+await fetch('/cart/add.js',{method:'POST',body:new FormData(f)});b&&(b.disabled=false);await refreshCart();openCart()});
+document.addEventListener('change',async e=>{const q=e.target.closest('[data-line-qty]');if(!q)return;await fetch('/cart/change.js',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({line:+q.dataset.lineQty,quantity:+q.value})});refreshCart()});
+document.querySelectorAll('[data-variant-select]').forEach(s=>s.addEventListener('change',()=>{const o=s.selectedOptions[0];const f=s.closest('.product');f.querySelector('[data-price]').textContent=o.dataset.price;const b=f.querySelector('[type=submit]');b.disabled=o.dataset.available!=='true';b.textContent=b.disabled?b.dataset.sold:b.dataset.add}));

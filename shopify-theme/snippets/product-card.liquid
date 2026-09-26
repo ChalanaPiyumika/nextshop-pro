@@ -1,0 +1,5 @@
+<a href="{{ product.url }}" class="card">
+  <div class="card__img">{% if product.featured_image %}{{ product.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', alt: product.title }}{% endif %}</div>
+  <div class="card__title">{{ product.title }}</div>
+  <div class="card__price">{% if product.price_varies %}From {% endif %}{{ product.price | money }}</div>
+</a>
