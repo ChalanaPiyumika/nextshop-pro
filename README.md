@@ -1,27 +1,48 @@
-# NextShop Pro
+# Antoinette Atelier — Shopify Liquid theme
 
-shopyfy full customizable project needed. like Liquid theme build. better to use next.js 
-https://www.figma.com/design/OsflQMy6kl6JPfGQXR4TGQ/Antoinette-Atelier?node-id=37-2959&t=cTolLdgGAte4WoN5-4
+A native Shopify Online Store 2.0 theme. Every section is editable in
+Shopify's Theme Editor (Customize) — hero image, headings, buttons, colours,
+spacing, collections, menus, and footer — no code needed.
 
-this is the figma design of project home page
+## Folder layout
 
-This project was built with [Lovable](https://lovable.dev).
+```text
+layout/theme.liquid              page shell, loads CSS/JS, renders sections
+sections/                        editable blocks with their own settings
+sections/header-group.json       header / announcement bar grouping
+sections/footer-group.json       footer grouping
+templates/*.json                 which sections appear on each page type
+templates/customers/*.liquid     account, login, order, address pages
+snippets/                        reusable Liquid partials (product card, cart lines)
+assets/base.css, theme.js        styles and behaviour
+config/settings_schema.json      Theme Editor sidebar: colours, type, social
+config/settings_data.json        saved defaults
+locales/en.default.json          English strings
+```
 
-## Build with Lovable
+## Auto-sync: GitHub → Shopify (recommended)
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/6001d1e1-499d-4d64-a348-861a71edfa0d).
+This repo is structured so Shopify can watch it directly. Any push to the
+connected branch updates the theme in your store automatically.
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+1. In Shopify Admin: **Online Store → Themes → Add theme → Connect from GitHub**.
+2. Authorize the Shopify GitHub app and select this repository.
+3. Choose the branch to track (e.g. `main`). Shopify creates a theme from it.
+4. From now on, every commit pushed to that branch syncs to the theme within
+   seconds. Publish the theme when it looks right.
 
-## Development
+Tip: keep `main` as your live branch and use a second branch (e.g. `dev`)
+connected as a separate unpublished theme for testing changes safely.
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+## Manual upload (alternative)
+
+1. Zip the **contents** of this repo (so `layout/` and `config/` sit at the
+   zip root, not inside a parent folder).
+2. In Shopify Admin: **Online Store → Themes → Add theme → Upload zip file**.
+
+## Local development with Shopify CLI
 
 ```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
+shopify theme dev --store <your-store>.myshopify.com
+shopify theme push --store <your-store>.myshopify.com
 ```
