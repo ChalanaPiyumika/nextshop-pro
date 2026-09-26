@@ -1,8 +1,154 @@
-const drawer=document.getElementById('CartDrawer');
-function openCart(){drawer&&drawer.classList.add('open')}function closeCart(){drawer&&drawer.classList.remove('open')}
-document.addEventListener('click',e=>{if(e.target.closest('[data-cart-open]')){e.preventDefault();refreshCart().then(openCart)}if(e.target.closest('[data-cart-close]'))closeCart()});
-async function refreshCart(){const r=await fetch('/?section_id=cart-drawer-content');const t=await r.text();const d=new DOMParser().parseFromString(t,'text/html');const n=d.querySelector('#CartDrawerInner');const c=document.getElementById('CartDrawerInner');if(n&&c)c.innerHTML=n.innerHTML;const cart=await (await fetch('/cart.js')).json();document.querySelectorAll('[data-cart-count]').forEach(el=>el.textContent=cart.item_count)}
-document.addEventListener('submit',async e=>{const f=e.target.closest('form[action$="/cart/add"]');if(!f)return;e.preventDefault();const b=f.querySelector('[type=submit]');b&&(b.disabled=true);
-await fetch('/cart/add.js',{method:'POST',body:new FormData(f)});b&&(b.disabled=false);await refreshCart();openCart()});
-document.addEventListener('change',async e=>{const q=e.target.closest('[data-line-qty]');if(!q)return;await fetch('/cart/change.js',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({line:+q.dataset.lineQty,quantity:+q.value})});refreshCart()});
-document.querySelectorAll('[data-variant-select]').forEach(s=>s.addEventListener('change',()=>{const o=s.selectedOptions[0];const f=s.closest('.product');f.querySelector('[data-price]').textContent=o.dataset.price;const b=f.querySelector('[type=submit]');b.disabled=o.dataset.available!=='true';b.textContent=b.disabled?b.dataset.sold:b.dataset.add}));
+/* Antoinette Atelier — cart drawer + quick add (Shopify AJAX cart API) */
+(function () {
+  "use strict";
+
+  var drawer = document.querySelector("[data-cart-drawer]");
+  var overlay = document.querySelector("[data-cart-overlay]");
+
+  function openCart() { document.body.classList.add("cart-open"); }
+  function closeCart() { document.body.classList.remove("cart-open"); }
+
+  document.addEventListener("click", function (event) {
+    var opener = event.target.closest("[data-cart-open]");
+    if (opener) { event.preventDefault(); openCart(); return; }
+    if (event.target.closest("[data-cart-close]") || event.target === overlay) {
+      closeCart();
+    }
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") closeCart();
+  });
+
+  function money(cents) {
+    var formatted = (cents / 100).toFixed(2);
+    return (window.Shopify && Shopify.currency && Shopify.currency.active === "EUR"
+      ? "€" + formatted
+      : "$" + formatted);
+  }
+
+  function renderCart(cart) {
+    if (!drawer) return;
+    var itemsWrap = drawer.querySelector("[data-cart-items]");
+    var subtotalEl = drawer.querySelector("[data-cart-subtotal]");
+    var bubbles = document.querySelectorAll("[data-cart-count]");
+
+    bubbles.forEach(function (b) {
+      b.textContent = cart.item_count;
+      b.style.display = cart.item_count > 0 ? "" : "none";
+    });
+
+    if (!itemsWrap) return;
+
+    if (!cart.items.length) {
+      itemsWrap.innerHTML =
+        '<div class="cart-drawer__empty"><h3>Your cart is empty</h3><p>Discover original artworks and prints in the collection.</p></div>';
+    } else {
+      itemsWrap.innerHTML = cart.items
+        .map(function (item) {
+          var img = item.image
+            ? '<img class="cart-line__image" src="' + item.image + '&width=152" alt="">'
+            : '<div class="cart-line__image"></div>';
+          return (
+            '<div class="cart-line" data-line-key="' + item.key + '">' +
+            img +
+            '<div>' +
+            '<p class="cart-line__title">' + item.product_title + "</p>" +
+            (item.variant_title && item.variant_title !== "Default Title"
+              ? '<p class="cart-line__variant">' + item.variant_title + "</p>"
+              : "") +
+            '<div class="cart-line__qty">' +
+            '<button type="button" data-qty-change="-1" aria-label="Decrease">−</button>' +
+            "<span>" + item.quantity + "</span>" +
+            '<button type="button" data-qty-change="1" aria-label="Increase">+</button>' +
+            "</div>" +
+            '<button type="button" class="cart-line__remove" data-remove>Remove</button>' +
+            "</div>" +
+            '<div class="cart-line__price">' + money(item.final_line_price) + "</div>" +
+            "</div>"
+          );
+        })
+        .join("");
+    }
+
+    if (subtotalEl) subtotalEl.textContent = money(cart.total_price);
+  }
+
+  function refreshCart() {
+    return fetch("/cart.js")
+      .then(function (r) { return r.json(); })
+      .then(renderCart);
+  }
+
+  function changeLine(key, quantity) {
+    return fetch("/cart/change.js", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: key, quantity: quantity }),
+    })
+      .then(function (r) { return r.json(); })
+      .then(renderCart);
+  }
+
+  if (drawer) {
+    drawer.addEventListener("click", function (event) {
+      var line = event.target.closest("[data-line-key]");
+      if (!line) return;
+      var key = line.getAttribute("data-line-key");
+      var qtyEl = line.querySelector(".cart-line__qty span");
+      var qty = qtyEl ? parseInt(qtyEl.textContent, 10) : 1;
+
+      if (event.target.closest("[data-remove]")) {
+        changeLine(key, 0);
+      } else if (event.target.closest("[data-qty-change]")) {
+        var delta = parseInt(event.target.closest("[data-qty-change]").getAttribute("data-qty-change"), 10);
+        changeLine(key, Math.max(0, qty + delta));
+      }
+    });
+  }
+
+  /* Quick add + product form AJAX submit */
+  document.addEventListener("submit", function (event) {
+    var form = event.target.closest("[data-ajax-add]");
+    if (!form) return;
+    event.preventDefault();
+    var button = form.querySelector("[type=submit]");
+    if (button) button.disabled = true;
+    var data = new FormData(form);
+    fetch("/cart/add.js", {
+      method: "POST",
+      headers: { Accept: "application/json" },
+      body: data,
+    })
+      .then(function (r) {
+        if (!r.ok) return r.json().then(function (e) { throw e; });
+        return r.json();
+      })
+      .then(function () { return refreshCart(); })
+      .then(openCart)
+      .catch(function () { form.submit(); })
+      .finally(function () { if (button) button.disabled = false; });
+  });
+
+  document.addEventListener("click", function (event) {
+    var quickAdd = event.target.closest("[data-quick-add]");
+    if (!quickAdd) return;
+    event.preventDefault();
+    var variantId = quickAdd.getAttribute("data-quick-add");
+    if (!variantId || quickAdd.disabled) return;
+    quickAdd.disabled = true;
+    fetch("/cart/add.js", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({ items: [{ id: Number(variantId), quantity: 1 }] }),
+    })
+      .then(function (r) { if (!r.ok) throw new Error("add failed"); return r.json(); })
+      .then(function () { return refreshCart(); })
+      .then(openCart)
+      .catch(function () {})
+      .finally(function () { quickAdd.disabled = false; });
+  });
+
+  /* Keep drawer in sync on page load */
+  if (drawer) refreshCart();
+})();
