@@ -1,0 +1,40 @@
+<style>#s-{{ section.id }}{padding:{{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;{% if section.settings.bg != blank %}background:{{ section.settings.bg }};{% endif %}{% if section.settings.fg != blank %}color:{{ section.settings.fg }};{% endif %}}</style>
+<section id="s-{{ section.id }}"><div class="container"><h1 class="center">Search</h1><form action="{{ routes.search_url }}" class="newsletter"><input type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search"><button class="btn">Search</button></form>
+<div class="grid grid--4" style="margin-top:48px">{% for item in search.results %}{% if item.object_type == 'product' %}{% render 'product-card', product: item %}{% endif %}{% endfor %}</div></div></section>
+{% schema %}
+{
+  "name": "Search",
+  "settings": [
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top spacing",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom spacing",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Background color"
+    },
+    {
+      "type": "color",
+      "id": "fg",
+      "label": "Text color"
+    }
+  ]
+}
+{% endschema %}

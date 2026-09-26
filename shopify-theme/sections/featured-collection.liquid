@@ -1,0 +1,90 @@
+<style>#s-{{ section.id }}{padding:{{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;{% if section.settings.bg != blank %}background:{{ section.settings.bg }};{% endif %}{% if section.settings.fg != blank %}color:{{ section.settings.fg }};{% endif %}}</style>
+<section id="s-{{ section.id }}"><div class="container">
+<div class="section-head center"><p class="eyebrow">{{ section.settings.eyebrow }}</p><h2>{{ section.settings.heading }}</h2></div>
+<div class="grid grid--{{ section.settings.columns }}">{% assign col = collections[section.settings.collection] %}
+{% if col != blank %}{% for product in col.products limit: section.settings.limit %}{% render 'product-card', product: product %}{% endfor %}
+{% else %}{% for product in collections.all.products limit: section.settings.limit %}{% render 'product-card', product: product %}{% endfor %}{% endif %}</div>
+{% if section.settings.btn != blank %}<div class="center" style="margin-top:48px"><a class="btn btn--outline" href="{% if col != blank %}{{ col.url }}{% else %}{{ routes.all_products_collection_url }}{% endif %}">{{ section.settings.btn }}</a></div>{% endif %}</div></section>
+{% schema %}
+{
+  "name": "Featured collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small heading",
+      "default": "Curated"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The Collection"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "label": "Products",
+      "min": 2,
+      "max": 16,
+      "step": 1,
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Columns",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "text",
+      "id": "btn",
+      "label": "Button label",
+      "default": "View all"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top spacing",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom spacing",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Background color"
+    },
+    {
+      "type": "color",
+      "id": "fg",
+      "label": "Text color"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured collection"
+    }
+  ]
+}
+{% endschema %}

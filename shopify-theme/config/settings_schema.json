@@ -1,0 +1,103 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Antoinette Atelier",
+    "theme_version": "1.0.0",
+    "theme_author": "Antoinette",
+    "theme_documentation_url": "https://help.shopify.com",
+    "theme_support_url": "https://help.shopify.com"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "Background",
+        "default": "#faf7f2"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Text",
+        "default": "#2b2622"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent",
+        "default": "#c9b39a"
+      },
+      {
+        "type": "color",
+        "id": "color_muted",
+        "label": "Borders / muted",
+        "default": "#ebe4da"
+      },
+      {
+        "type": "color",
+        "id": "color_button",
+        "label": "Button",
+        "default": "#2b2622"
+      },
+      {
+        "type": "color",
+        "id": "color_button_text",
+        "label": "Button text",
+        "default": "#faf7f2"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "heading_font",
+        "label": "Heading font",
+        "default": "libre_baskerville_n4"
+      },
+      {
+        "type": "font_picker",
+        "id": "body_font",
+        "label": "Body font",
+        "default": "dm_sans_n4"
+      }
+    ]
+  },
+  {
+    "name": "Layout",
+    "settings": [
+      {
+        "type": "range",
+        "id": "page_width",
+        "label": "Page width",
+        "min": 1000,
+        "max": 1800,
+        "step": 20,
+        "unit": "px",
+        "default": 1320
+      },
+      {
+        "type": "range",
+        "id": "button_radius",
+        "label": "Button corner radius",
+        "min": 0,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "default": 0
+      }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon"
+      }
+    ]
+  }
+]

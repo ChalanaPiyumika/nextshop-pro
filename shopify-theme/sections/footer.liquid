@@ -1,0 +1,56 @@
+<footer class="footer" style="background:{{ section.settings.bg }};color:{{ section.settings.fg }};padding:64px 0 32px"><div class="container"><div class="footer__cols">
+<div><div class="header__logo">{{ shop.name }}</div><div class="rte" style="font-size:14px;opacity:.8;margin-top:12px">{{ section.settings.about }}</div></div>
+{% for block in section.blocks %}<div {{ block.shopify_attributes }}><p class="eyebrow">{{ block.settings.title }}</p><ul>{% for link in linklists[block.settings.menu].links %}<li><a href="{{ link.url }}">{{ link.title }}</a></li>{% endfor %}</ul></div>{% endfor %}</div>
+<p style="font-size:12px;opacity:.6;margin-top:48px">© {{ 'now' | date: '%Y' }} {{ shop.name }}. {{ section.settings.copyright }}</p></div></footer>
+{% schema %}
+{
+  "name": "Footer",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "about",
+      "label": "About text",
+      "default": "<p>Timeless pieces from our atelier.</p>"
+    },
+    {
+      "type": "text",
+      "id": "copyright",
+      "label": "Copyright text",
+      "default": "All rights reserved."
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Background",
+      "default": "#f3eee7"
+    },
+    {
+      "type": "color",
+      "id": "fg",
+      "label": "Text",
+      "default": "#2b2622"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Menu column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Shop"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu",
+          "default": "footer"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

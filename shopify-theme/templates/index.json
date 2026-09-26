@@ -1,0 +1,50 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero"
+    },
+    "featured": {
+      "type": "featured-collection"
+    },
+    "story": {
+      "type": "image-with-text"
+    },
+    "cats": {
+      "type": "collection-list",
+      "blocks": {
+        "c1": {
+          "type": "collection"
+        },
+        "c2": {
+          "type": "collection"
+        },
+        "c3": {
+          "type": "collection"
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3"
+      ]
+    },
+    "quotes": {
+      "type": "testimonials"
+    },
+    "news": {
+      "type": "newsletter",
+      "settings": {
+        "bg": "#2b2622",
+        "fg": "#f7f3ee"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "featured",
+    "story",
+    "cats",
+    "quotes",
+    "news"
+  ]
+}

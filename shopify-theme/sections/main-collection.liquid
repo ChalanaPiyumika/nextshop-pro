@@ -1,0 +1,60 @@
+<style>#s-{{ section.id }}{padding:{{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;{% if section.settings.bg != blank %}background:{{ section.settings.bg }};{% endif %}{% if section.settings.fg != blank %}color:{{ section.settings.fg }};{% endif %}}</style>
+<section id="s-{{ section.id }}"><div class="container">{% paginate collection.products by section.settings.per_page %}
+<div class="section-head center"><h1>{{ collection.title }}</h1><div class="rte">{{ collection.description }}</div></div>
+<div class="grid grid--{{ section.settings.columns }}">{% for product in collection.products %}{% render 'product-card', product: product %}{% else %}<p>No products found.</p>{% endfor %}</div>
+<div class="pagination">{{ paginate | default_pagination }}</div>{% endpaginate %}</div></section>
+{% schema %}
+{
+  "name": "Collection page",
+  "settings": [
+    {
+      "type": "range",
+      "id": "per_page",
+      "label": "Products per page",
+      "min": 4,
+      "max": 48,
+      "step": 4,
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Columns",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top spacing",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom spacing",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Background color"
+    },
+    {
+      "type": "color",
+      "id": "fg",
+      "label": "Text color"
+    }
+  ]
+}
+{% endschema %}

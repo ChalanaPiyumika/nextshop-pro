@@ -1,0 +1,39 @@
+<header class="header {% if section.settings.sticky %}header--sticky{% endif %}"><div class="container header__inner">
+<a href="{{ routes.root_url }}" class="header__logo">{% if section.settings.logo %}{{ section.settings.logo | image_url: width: 400 | image_tag: height: section.settings.logo_height, style: 'width:auto', alt: shop.name }}{% else %}{{ shop.name }}{% endif %}</a>
+<nav class="header__nav">{% for link in linklists[section.settings.menu].links %}<a href="{{ link.url }}">{{ link.title }}</a>{% endfor %}</nav>
+<div class="header__icons"><a href="{{ routes.search_url }}">Search</a>{% if shop.customer_accounts_enabled %}<a href="{{ routes.account_url }}">Account</a>{% endif %}
+<a href="{{ routes.cart_url }}" data-cart-open>Bag (<span data-cart-count>{{ cart.item_count }}</span>)</a></div></div></header>
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "range",
+      "id": "logo_height",
+      "label": "Logo height",
+      "min": 20,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky",
+      "label": "Sticky header",
+      "default": true
+    }
+  ]
+}
+{% endschema %}
