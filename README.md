@@ -1,7 +1,8 @@
 # Antoinette Atelier — Shopify Liquid theme
 
-A native Shopify Online Store 2.0 theme. Every section below can be edited in
-Shopify's Theme Editor (Customize), no code needed.
+A native Shopify Online Store 2.0 theme. Every section is editable in
+Shopify's Theme Editor (Customize) — hero image, headings, buttons, colours,
+spacing, collections, menus, and footer — no code needed.
 
 ## Folder layout
 
@@ -19,20 +20,27 @@ config/settings_data.json        saved defaults
 locales/en.default.json          English strings
 ```
 
-## Upload to Shopify
+## Auto-sync: GitHub → Shopify (recommended)
 
-1. Zip the **contents** of this folder (so `layout/` and `config/` sit at the
+This repo is structured so Shopify can watch it directly. Any push to the
+connected branch updates the theme in your store automatically.
+
+1. In Shopify Admin: **Online Store → Themes → Add theme → Connect from GitHub**.
+2. Authorize the Shopify GitHub app and select this repository.
+3. Choose the branch to track (e.g. `main`). Shopify creates a theme from it.
+4. From now on, every commit pushed to that branch syncs to the theme within
+   seconds. Publish the theme when it looks right.
+
+Tip: keep `main` as your live branch and use a second branch (e.g. `dev`)
+connected as a separate unpublished theme for testing changes safely.
+
+## Manual upload (alternative)
+
+1. Zip the **contents** of this repo (so `layout/` and `config/` sit at the
    zip root, not inside a parent folder).
 2. In Shopify Admin: **Online Store → Themes → Add theme → Upload zip file**.
-3. Press **Customize** to set the hero image, headings, buttons, colours,
-   spacing, collections, menus, and footer.
-4. **Save**, then publish the theme when it looks right.
 
-## Editing in GitHub
-
-This folder is part of the project repository, so pushing changes here syncs
-them into Lovable, and Lovable changes sync back here. To work on a real store
-instead, install the Shopify CLI in this folder and run:
+## Local development with Shopify CLI
 
 ```sh
 shopify theme dev --store <your-store>.myshopify.com
