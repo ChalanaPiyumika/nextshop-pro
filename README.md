@@ -1,29 +1,40 @@
-# Welcome to your Lovable project
+# Antoinette Atelier — Shopify Liquid theme
 
-This project was built with [Lovable](https://lovable.dev).
+A native Shopify Online Store 2.0 theme. Every section below can be edited in
+Shopify's Theme Editor (Customize), no code needed.
 
-## Build with Lovable
+## Folder layout
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
+```text
+layout/theme.liquid              page shell, loads CSS/JS, renders sections
+sections/                        editable blocks with their own settings
+sections/header-group.json       header / announcement bar grouping
+sections/footer-group.json       footer grouping
+templates/*.json                 which sections appear on each page type
+templates/customers/*.liquid     account, login, order, address pages
+snippets/                        reusable Liquid partials (product card, cart lines)
+assets/base.css, theme.js        styles and behaviour
+config/settings_schema.json      Theme Editor sidebar: colours, type, social
+config/settings_data.json        saved defaults
+locales/en.default.json          English strings
 ```
 
-## Built with
+## Upload to Shopify
 
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
+1. Zip the **contents** of this folder (so `layout/` and `config/` sit at the
+   zip root, not inside a parent folder).
+2. In Shopify Admin: **Online Store → Themes → Add theme → Upload zip file**.
+3. Press **Customize** to set the hero image, headings, buttons, colours,
+   spacing, collections, menus, and footer.
+4. **Save**, then publish the theme when it looks right.
+
+## Editing in GitHub
+
+This folder is part of the project repository, so pushing changes here syncs
+them into Lovable, and Lovable changes sync back here. To work on a real store
+instead, install the Shopify CLI in this folder and run:
+
+```sh
+shopify theme dev --store <your-store>.myshopify.com
+shopify theme push --store <your-store>.myshopify.com
+```
