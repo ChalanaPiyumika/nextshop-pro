@@ -8,20 +8,11 @@
   <link rel="canonical" href="{{ canonical_url }}">
   {{ settings.heading_font | font_face: font_display: 'swap' }}
   {{ settings.body_font | font_face: font_display: 'swap' }}
-  <style>
-    :root{
-      --c-bg:{{ settings.color_background }};--c-fg:{{ settings.color_text }};
-      --c-accent:{{ settings.color_accent }};--c-muted:{{ settings.color_muted }};
-      --c-btn:{{ settings.color_button }};--c-btn-fg:{{ settings.color_button_text }};
-      --f-head:{{ settings.heading_font.family }},{{ settings.heading_font.fallback_families }};
-      --f-body:{{ settings.body_font.family }},{{ settings.body_font.fallback_families }};
-      --radius:{{ settings.button_radius }}px;--page:{{ settings.page_width }}px;
-    }
-  </style>
+  <style>:root{--color-bone:{{ settings.color_background }};--color-ink:{{ settings.color_text }};--color-earth:{{ settings.color_accent }};--color-line:{{ settings.color_muted }};--font-display:{{ settings.heading_font.family }},{{ settings.heading_font.fallback_families }};--font-body:{{ settings.body_font.family }},{{ settings.body_font.fallback_families }};--page-width:{{ settings.page_width }}px}</style>
   {{ 'base.css' | asset_url | stylesheet_tag }}
   {{ content_for_header }}
 </head>
-<body>
+<body class="template-{{ request.page_type | handle }}">
   {% sections 'header-group' %}
   <main id="main">{{ content_for_layout }}</main>
   {% sections 'footer-group' %}
