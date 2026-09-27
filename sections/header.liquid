@@ -1,39 +1,15 @@
-<header class="header {% if section.settings.sticky %}header--sticky{% endif %}"><div class="container header__inner">
-<a href="{{ routes.root_url }}" class="header__logo">{% if section.settings.logo %}{{ section.settings.logo | image_url: width: 400 | image_tag: height: section.settings.logo_height, style: 'width:auto', alt: shop.name }}{% else %}{{ shop.name }}{% endif %}</a>
-<nav class="header__nav">{% for link in linklists[section.settings.menu].links %}<a href="{{ link.url }}">{{ link.title }}</a>{% endfor %}</nav>
-<div class="header__icons"><a href="{{ routes.search_url }}">Search</a>{% if shop.customer_accounts_enabled %}<a href="{{ routes.account_url }}">Account</a>{% endif %}
-<a href="{{ routes.cart_url }}" data-cart-open>Bag (<span data-cart-count>{{ cart.item_count }}</span>)</a></div></div></header>
+<header class="site-header{% if request.page_type == 'index' and section.settings.overlay_home %} site-header--overlay{% endif %}{% if section.settings.sticky %} site-header--sticky{% endif %}">
+  <div class="site-header__inner">
+    <nav class="site-header__nav" aria-label="Primary navigation">{% for link in section.settings.menu.links %}<a href="{{ link.url }}">{{ link.title }}</a>{% endfor %}</nav>
+    <details class="mobile-menu"><summary aria-label="Open menu"><span></span><span></span></summary><nav>{% for link in section.settings.menu.links %}<a href="{{ link.url }}">{{ link.title }}</a>{% endfor %}</nav></details>
+    <a href="{{ routes.root_url }}" class="site-header__logo">{% if section.settings.logo %}{{ section.settings.logo | image_url: width: 500 | image_tag: height: section.settings.logo_height, widths: '180,260,360,500', alt: shop.name }}{% else %}{{ shop.name }}{% endif %}</a>
+    <div class="site-header__icons">
+      <a href="{{ routes.search_url }}" aria-label="Search"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg></a>
+      {% if shop.customer_accounts_enabled %}<a href="{{ routes.account_url }}" aria-label="Account"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20c.8-4 3.1-6 7-6s6.2 2 7 6"></path></svg></a>{% endif %}
+      <a href="{{ routes.cart_url }}" data-cart-open aria-label="Open bag"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6L5 8Z"></path><path d="M9 9V6a3 3 0 0 1 6 0v3"></path></svg><span class="cart-count-bubble" data-cart-count{% if cart.item_count == 0 %} hidden{% endif %}>{{ cart.item_count }}</span></a>
+    </div>
+  </div>
+</header>
 {% schema %}
-{
-  "name": "Header",
-  "settings": [
-    {
-      "type": "image_picker",
-      "id": "logo",
-      "label": "Logo"
-    },
-    {
-      "type": "range",
-      "id": "logo_height",
-      "label": "Logo height",
-      "min": 20,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "default": 40
-    },
-    {
-      "type": "link_list",
-      "id": "menu",
-      "label": "Menu",
-      "default": "main-menu"
-    },
-    {
-      "type": "checkbox",
-      "id": "sticky",
-      "label": "Sticky header",
-      "default": true
-    }
-  ]
-}
+{"name":"Header","settings":[{"type":"image_picker","id":"logo","label":"Logo"},{"type":"range","id":"logo_height","label":"Logo height","min":20,"max":80,"step":2,"unit":"px","default":34},{"type":"link_list","id":"menu","label":"Menu","default":"main-menu"},{"type":"checkbox","id":"overlay_home","label":"Overlay header on home page","default":true},{"type":"checkbox","id":"sticky","label":"Sticky header on inner pages","default":true}]}
 {% endschema %}

@@ -1,37 +1,4 @@
-{% if section.settings.show %}<div class="announcement" style="background:{{ section.settings.bg }};color:{{ section.settings.fg }}">{% if section.settings.link != blank %}<a href="{{ section.settings.link }}">{{ section.settings.text }}</a>{% else %}{{ section.settings.text }}{% endif %}</div>{% endif %}
+{% if section.settings.show %}<div class="announcement-bar" style="background:{{ section.settings.bg }};color:{{ section.settings.fg }}">{% if section.settings.link != blank %}<a href="{{ section.settings.link }}">{{ section.settings.text }}</a>{% else %}{{ section.settings.text }}{% endif %}</div>{% endif %}
 {% schema %}
-{
-  "name": "Announcement bar",
-  "settings": [
-    {
-      "type": "checkbox",
-      "id": "show",
-      "label": "Show",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "text",
-      "label": "Text",
-      "default": "Complimentary shipping on all orders"
-    },
-    {
-      "type": "url",
-      "id": "link",
-      "label": "Link"
-    },
-    {
-      "type": "color",
-      "id": "bg",
-      "label": "Background",
-      "default": "#2b2622"
-    },
-    {
-      "type": "color",
-      "id": "fg",
-      "label": "Text",
-      "default": "#f7f3ee"
-    }
-  ]
-}
+{"name":"Announcement bar","settings":[{"type":"checkbox","id":"show","label":"Show","default":true},{"type":"text","id":"text","label":"Text","default":"Complimentary shipping on orders over $150"},{"type":"url","id":"link","label":"Link"},{"type":"color","id":"bg","label":"Background","default":"#1c1915"},{"type":"color","id":"fg","label":"Text","default":"#faf7f1"}]}
 {% endschema %}

@@ -710,3 +710,29 @@ body.cart-open .cart-drawer { transform: translateX(0); }
   .newsletter__form input { border: 1px solid currentColor; }
   .newsletter__form button { border: 1px solid currentColor; padding: 14px; }
 }
+
+/* ---------- Shopify section integrations ---------- */
+.site-header--sticky { position: sticky; top: 0; }
+.template-index .announcement-bar + .shopify-section .site-header--overlay,
+.template-index .site-header--overlay { top: 35px; }
+.site-header__icons svg { width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 1.5; }
+.site-header__logo img { display: block; width: auto; max-height: 52px; }
+.mobile-menu { display: none; }
+.mobile-menu summary { list-style: none; cursor: pointer; }
+.mobile-menu summary::-webkit-details-marker { display: none; }
+.mobile-menu summary span { display: block; width: 22px; height: 1px; margin: 6px 0; background: currentColor; }
+.mobile-menu nav { position: absolute; left: 0; right: 0; top: 100%; display: grid; gap: 18px; padding: 26px var(--gutter); background: var(--color-bone); color: var(--color-ink); border-top: 1px solid var(--color-line); }
+.hero__media video, .hero__media svg, .collection-tile svg, .product-card__media svg, .editorial__media svg { width: 100%; height: 100%; object-fit: cover; }
+.hero__eyebrow { color: inherit; }
+.editorial .text-link { display: inline-block; margin-top: 20px; }
+.section--light { background: var(--color-bone); color: var(--color-ink); }
+.statement__copy { margin: 18px auto; opacity: .72; }
+.shopify-section:has(.newsletter) + .shopify-section .site-footer { padding-top: 72px; }
+
+@media (max-width: 750px) {
+  .mobile-menu { display: block; }
+  .hero__content { padding-bottom: 54px; }
+  .collection-tile { aspect-ratio: 5 / 4; }
+  .product-card__quick-add { opacity: 1; transform: none; }
+  .template-index .site-header--overlay { top: 34px; }
+}
