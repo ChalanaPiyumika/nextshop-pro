@@ -1,5 +1,5 @@
 <style>#s-{{ section.id }}{padding:{{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;{% if section.settings.bg != blank %}background:{{ section.settings.bg }};{% endif %}{% if section.settings.fg != blank %}color:{{ section.settings.fg }};{% endif %}}</style>
-<section id="s-{{ section.id }}"><div class="container"><h1 class="center">Collections</h1><div class="grid grid--3">{% for c in collections %}<a href="{{ c.url }}" class="card"><div class="card__img">{% if c.image %}{{ c.image | image_url: width: 800 | image_tag }}{% endif %}</div><div class="card__title">{{ c.title }}</div></a>{% endfor %}</div></div></section>
+<section id="s-{{ section.id }}"><div class="page-width"><div class="collection-hero"><p class="eyebrow">Browse</p><h1>Collections</h1></div><div class="collection-tiles">{% for c in collections %}<a href="{{ c.url }}" class="collection-tile">{% if c.image %}{{ c.image | image_url: width: 1000 | image_tag: loading: 'lazy', alt: c.title }}{% else %}{{ 'collection-1' | placeholder_svg_tag }}{% endif %}<span class="collection-tile__shade"></span><span class="collection-tile__label">{{ c.title }}<span class="collection-tile__count">{{ c.products_count }} works</span></span></a>{% endfor %}</div></div></section>
 {% schema %}
 {
   "name": "Collections list",

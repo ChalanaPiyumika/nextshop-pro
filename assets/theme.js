@@ -152,3 +152,20 @@
   /* Keep drawer in sync on page load */
   if (drawer) refreshCart();
 })();
+
+/* Product page: variant price + gallery thumbnails */
+(function () {
+  document.addEventListener("change", function (e) {
+    var sel = e.target.closest("[data-variant-select]"); if (!sel) return;
+    var opt = sel.options[sel.selectedIndex], form = sel.closest("form");
+    var price = document.querySelector("[data-price]"); if (price) price.textContent = opt.getAttribute("data-price");
+    var btn = form && form.querySelector("[type=submit][data-add]");
+    if (btn) { var ok = opt.getAttribute("data-available") === "true"; btn.disabled = !ok; btn.textContent = ok ? btn.getAttribute("data-add") : btn.getAttribute("data-sold"); }
+    var u = new URL(location.href); u.searchParams.set("variant", sel.value); history.replaceState(null, "", u);
+  });
+  document.addEventListener("click", function (e) {
+    var t = e.target.closest(".product-main__thumbs img"); if (!t) return;
+    var main = document.querySelector("[data-main-image] img"); if (main && t.dataset.full) { main.src = t.dataset.full; main.removeAttribute("srcset"); }
+    t.parentNode.querySelectorAll("img").forEach(function (i) { i.classList.toggle("is-active", i === t); });
+  });
+})();
