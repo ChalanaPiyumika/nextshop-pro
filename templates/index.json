@@ -1,1 +1,151 @@
-{"sections":{"hero":{"type":"hero","settings":{"overlay_opacity":0,"eyebrow":"","heading":"Antoinette Atelier<br>Collection","text":"<p>an artistic space that creates prints, sculptures and artwork. we believe in a minimal and abstract approach where we aim for a modern and timeless expression.</p>","btn1":"Shop the Collection","btn2":"View Premium Editions"}},"cats":{"type":"collection-list","blocks":{"c1":{"type":"collection","settings":{"title":"Original works"}},"c2":{"type":"collection","settings":{"title":"Limited editions"}},"c3":{"type":"collection","settings":{"title":"Objects"}}},"block_order":["c1","c2","c3"]},"featured":{"type":"featured-collection","settings":{"eyebrow":"Recently added","heading":"New arrivals","limit":4}},"feature":{"type":"image-with-text","settings":{"eyebrow":"The edit","heading":"A study in natural form","theme":"dark"}},"statement":{"type":"rich-text","blocks":{"h":{"type":"heading","settings":{"text":"Art has the power to make a room feel entirely your own."}},"t":{"type":"text","settings":{"text":"<p>Chosen slowly, lived with daily.</p>"}}},"block_order":["h","t"]},"story":{"type":"image-with-text","settings":{"eyebrow":"Inside the atelier","heading":"A collection shaped by curiosity","theme":"light","bg":"#f0e8dd","fg":"#26221d","reverse":true,"btn":"Our story"}},"news":{"type":"newsletter"}},"order":["hero","cats","featured","feature","statement","story","news"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "image": "shopify://shop_images/d5d5ce5b4a1fb4939a6ce34a251faf7f27759127.jpg",
+        "overlay_opacity": 0,
+        "height": 90,
+        "text_align": "left",
+        "eyebrow": "",
+        "heading": "Antoinette AtelierCollection",
+        "text": "<p>an artistic space that creates prints, sculptures and artwork. we believe in a minimal and abstract approach where we aim for a modern and timeless expression.</p>",
+        "btn1": "Shop the Collection",
+        "btn1_link": "",
+        "btn2": "View Premium Editions",
+        "btn2_link": ""
+      }
+    },
+    "cats": {
+      "type": "collection-list",
+      "blocks": {
+        "c1": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "title": "Original works"
+          }
+        },
+        "c2": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "title": "Limited editions"
+          }
+        },
+        "c3": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "title": "Objects"
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3"
+      ],
+      "settings": {
+        "eyebrow": "Browse",
+        "heading": "Find your piece",
+        "link_label": "View all collections",
+        "bg": "#faf7f1",
+        "fg": "#26221d"
+      }
+    },
+    "featured": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "Recently added",
+        "heading": "New arrivals",
+        "collection": "",
+        "limit": 4,
+        "btn": "Shop all works",
+        "bg": "#faf7f1",
+        "fg": "#26221d"
+      }
+    },
+    "feature": {
+      "type": "image-with-text",
+      "settings": {
+        "reverse": false,
+        "theme": "dark",
+        "eyebrow": "The edit",
+        "heading": "A study in natural form",
+        "text": "<p>A considered selection of works where organic silhouettes, tactile surfaces and quiet colour meet.</p>",
+        "btn": "Discover the collection",
+        "btn_link": "",
+        "bg": "#1c1915",
+        "fg": "#faf7f1"
+      }
+    },
+    "statement": {
+      "type": "rich-text",
+      "blocks": {
+        "h": {
+          "type": "heading",
+          "settings": {
+            "text": "Art has the power to make a room feel entirely your own."
+          }
+        },
+        "t": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Chosen slowly, lived with daily.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "h",
+        "t"
+      ],
+      "settings": {
+        "bg": "#faf7f1",
+        "fg": "#26221d"
+      }
+    },
+    "story": {
+      "type": "image-with-text",
+      "settings": {
+        "reverse": true,
+        "theme": "light",
+        "eyebrow": "Inside the atelier",
+        "heading": "A collection shaped by curiosity",
+        "text": "<p>A considered selection of works where organic silhouettes, tactile surfaces and quiet colour meet.</p>",
+        "btn": "Our story",
+        "btn_link": "",
+        "bg": "#f0e8dd",
+        "fg": "#26221d"
+      }
+    },
+    "news": {
+      "type": "newsletter",
+      "settings": {
+        "eyebrow": "Notes from the studio",
+        "heading": "Join the atelier",
+        "text": "<p>New works, studio stories and considered inspiration, delivered occasionally.</p>",
+        "bg": "#1c1915",
+        "fg": "#faf7f1"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "cats",
+    "featured",
+    "feature",
+    "statement",
+    "story",
+    "news"
+  ]
+}
