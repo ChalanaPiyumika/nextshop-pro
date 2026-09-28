@@ -736,3 +736,11 @@ body.cart-open .cart-drawer { transform: translateX(0); }
   .product-card__quick-add { opacity: 1; transform: none; }
   .template-index .site-header--overlay { top: 34px; }
 }
+
+/* ---------- Page helpers (product, account, legacy markup) ---------- */
+.rte p { margin: 0 0 1em; } .rte img { max-width: 100%; height: auto; }
+.container { max-width: var(--page-width); margin: 0 auto; padding-left: var(--gutter); padding-right: var(--gutter); }
+.center { text-align: center; }
+.qty, .variant-select { display: block; width: 100%; padding: 13px 14px; margin: 0 0 14px; border: 1px solid var(--color-line); background: transparent; font: inherit; color: inherit; border-radius: 0; }
+.customer-page h1 { margin-bottom: 28px; } .customer-page table { width: 100%; border-collapse: collapse; } .customer-page td, .customer-page th { padding: 12px 8px; border-bottom: 1px solid var(--color-line); text-align: left; }
+.product-main__thumbs img { opacity: .7; } .product-main__thumbs img.is-active { opacity: 1; }

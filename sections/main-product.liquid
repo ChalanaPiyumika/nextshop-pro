@@ -1,13 +1,13 @@
 <style>#s-{{ section.id }}{padding:{{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;{% if section.settings.bg != blank %}background:{{ section.settings.bg }};{% endif %}{% if section.settings.fg != blank %}color:{{ section.settings.fg }};{% endif %}}</style>
-<section id="s-{{ section.id }}"><div class="container product">
-<div class="product__gallery">{% for media in product.media %}{{ media | image_url: width: 1400 | image_tag: loading: 'lazy' }}{% endfor %}</div>
-<div><p class="eyebrow">{{ product.vendor }}</p><h1>{{ product.title }}</h1><p data-price style="font-size:20px">{{ product.selected_or_first_available_variant.price | money }}</p>
-{% form 'product', product %}{% assign cur = product.selected_or_first_available_variant %}
-<select name="id" class="variant-select" data-variant-select {% if product.has_only_default_variant %}hidden{% endif %}>{% for v in product.variants %}<option value="{{ v.id }}" data-price="{{ v.price | money }}" data-available="{{ v.available }}" {% if v == cur %}selected{% endif %}>{{ v.title }}{% unless v.available %} – sold out{% endunless %}</option>{% endfor %}</select>
-{% if section.settings.show_qty %}<input class="qty" type="number" name="quantity" value="1" min="1">{% endif %}
-<button type="submit" class="btn" style="width:100%" data-add="Add to bag" data-sold="Sold out" {% unless cur.available %}disabled{% endunless %}>{% if cur.available %}Add to bag{% else %}Sold out{% endif %}</button>
+<section id="s-{{ section.id }}"><div class="page-width"><div class="product-main">{% assign cur = product.selected_or_first_available_variant %}
+<div class="product-main__media">{% if product.featured_media %}<div data-main-image>{{ product.featured_media | image_url: width: 1600 | image_tag: loading: 'eager', alt: product.title }}</div>{% else %}{{ 'product-1' | placeholder_svg_tag }}{% endif %}{% if product.media.size > 1 %}<div class="product-main__thumbs">{% for media in product.media %}{{ media | image_url: width: 200 | image_tag: loading: 'lazy', alt: media.alt, data-full: media.preview_image.src | image_url: width: 1600 }}{% endfor %}</div>{% endif %}</div>
+<div><p class="product-main__vendor">{{ product.vendor }}</p><h1>{{ product.title }}</h1><p class="product-main__price" data-price>{% if cur.compare_at_price > cur.price %}<s>{{ cur.compare_at_price | money }}</s>{% endif %}{{ cur.price | money }}</p>
+{% form 'product', product, class: 'product-main__form', data-ajax-add: '' %}
+<div class="variant-picker" {% if product.has_only_default_variant %}hidden{% endif %}><label for="v-{{ section.id }}">Option</label><select id="v-{{ section.id }}" name="id" data-variant-select>{% for v in product.variants %}<option value="{{ v.id }}" data-price="{{ v.price | money }}" data-available="{{ v.available }}" {% if v == cur %}selected{% endif %}>{{ v.title }}{% unless v.available %} – sold out{% endunless %}</option>{% endfor %}</select></div>
+{% if section.settings.show_qty %}<div class="field" style="max-width:120px"><label for="q-{{ section.id }}">Quantity</label><input id="q-{{ section.id }}" type="number" name="quantity" value="1" min="1"></div>{% endif %}
+<button type="submit" class="btn" data-add="Add to bag" data-sold="Sold out" {% unless cur.available %}disabled{% endunless %}>{% if cur.available %}Add to bag{% else %}Sold out{% endif %}</button>
 {% if section.settings.dynamic_checkout %}<div style="margin-top:12px">{{ form | payment_button }}</div>{% endif %}{% endform %}
-<div class="rte" style="margin-top:32px">{{ product.description }}</div></div></div></section>
+<div class="product-main__description rte" style="margin-top:32px">{{ product.description }}</div><div class="product-main__trust"><span>Carefully packed</span><span>Secure checkout</span></div></div></div></div></section>
 {% schema %}
 {
   "name": "Product page",

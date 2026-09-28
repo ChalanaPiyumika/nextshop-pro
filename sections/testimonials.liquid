@@ -1,6 +1,5 @@
 <style>#s-{{ section.id }}{padding:{{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;{% if section.settings.bg != blank %}background:{{ section.settings.bg }};{% endif %}{% if section.settings.fg != blank %}color:{{ section.settings.fg }};{% endif %}}</style>
-<section id="s-{{ section.id }}"><div class="container center"><p class="eyebrow">{{ section.settings.heading }}</p>
-{% for block in section.blocks %}<div {{ block.shopify_attributes }} style="margin:32px 0"><blockquote class="testimonial">“{{ block.settings.quote }}”</blockquote><p class="eyebrow">{{ block.settings.author }}</p></div>{% endfor %}</div></section>
+<section id="s-{{ section.id }}" class="statement"><div class="page-width"><p class="eyebrow">{{ section.settings.heading }}</p>{% for block in section.blocks %}<div {{ block.shopify_attributes }} style="margin:36px 0"><blockquote class="statement__text">“{{ block.settings.quote }}”</blockquote><p class="eyebrow" style="margin-top:16px">{{ block.settings.author }}</p></div>{% endfor %}</div></section>
 {% schema %}
 {
   "name": "Testimonials",

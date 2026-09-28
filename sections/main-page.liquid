@@ -1,5 +1,5 @@
 <style>#s-{{ section.id }}{padding:{{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;{% if section.settings.bg != blank %}background:{{ section.settings.bg }};{% endif %}{% if section.settings.fg != blank %}color:{{ section.settings.fg }};{% endif %}}</style>
-<section id="s-{{ section.id }}"><div class="container" style="max-width:820px"><h1>{{ page.title }}</h1><div class="rte">{{ page.content }}</div></div></section>
+<section id="s-{{ section.id }}"><div class="page-width" style="max-width:820px"><p class="eyebrow">{{ shop.name }}</p><h1>{{ page.title }}</h1><div class="rte">{{ page.content }}</div></div></section>
 {% schema %}
 {
   "name": "Page",
