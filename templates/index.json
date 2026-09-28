@@ -9,22 +9,6 @@
  */
 {
   "sections": {
-    "hero": {
-      "type": "hero",
-      "settings": {
-        "image": "shopify://shop_images/d5d5ce5b4a1fb4939a6ce34a251faf7f27759127.jpg",
-        "overlay_opacity": 0,
-        "height": 100,
-        "text_align": "left",
-        "eyebrow": "",
-        "heading": "Antoinette AtelierCollection",
-        "text": "<p>an artistic space that creates prints, sculptures and artwork. we believe in a minimal and abstract approach where we aim for a modern and timeless expression.</p>",
-        "btn1": "Shop the Collection",
-        "btn1_link": "",
-        "btn2": "View Premium Editions",
-        "btn2_link": ""
-      }
-    },
     "cats": {
       "type": "collection-list",
       "blocks": {
@@ -140,7 +124,6 @@
     }
   },
   "order": [
-    "hero",
     "cats",
     "featured",
     "feature",
