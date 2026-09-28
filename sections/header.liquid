@@ -1,4 +1,4 @@
-<header class="site-header{% if request.page_type == 'index' and section.settings.overlay_home %} site-header--overlay{% endif %}{% if section.settings.sticky %} site-header--sticky{% endif %}">
+\\\\\\<header class="site-header{% if request.page_type == 'index' and section.settings.overlay_home %} site-header--overlay{% endif %}{% if section.settings.sticky %} site-header--sticky{% endif %}">
   <div class="site-header__inner">
     <a href="{{ routes.root_url }}" class="site-header__logo">{% if section.settings.logo %}{{ section.settings.logo | image_url: width: 500 | image_tag: height: section.settings.logo_height, widths: '180,260,360,500', alt: shop.name }}{% else %}{{ shop.name }}{% endif %}</a>
     <nav class="site-header__nav" aria-label="Primary navigation">{% for link in section.settings.menu.links %}<a href="{{ link.url }}"{% if link.active %} aria-current="page"{% endif %}>{{ link.title }}</a>{% endfor %}</nav>
