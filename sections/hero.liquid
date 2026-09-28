@@ -5,7 +5,7 @@
     {% if section.settings.eyebrow != blank %}<p class="eyebrow hero__eyebrow">{{ section.settings.eyebrow }}</p>{% endif %}
     <h1 class="hero__heading">{{ section.settings.heading }}</h1>
     {% if section.settings.text != blank %}<div class="hero__subheading rte">{{ section.settings.text }}</div>{% endif %}
-    <div class="hero__actions">{% if section.settings.btn1 != blank %}<a class="btn btn--light" href="{{ section.settings.btn1_link | default: routes.all_products_collection_url }}">{{ section.settings.btn1 }}</a>{% endif %}{% if section.settings.btn2 != blank %}<a class="btn btn--outline-light" href="{{ section.settings.btn2_link }}">{{ section.settings.btn2 }}</a>{% endif %}</div>
+    <div class="hero__actions">{% if section.settings.btn1 != blank %}<a class="btn" href="{{ section.settings.btn1_link | default: routes.all_products_collection_url }}">{{ section.settings.btn1 }}</a>{% endif %}{% if section.settings.btn2 != blank %}<a class="btn btn--earth" href="{{ section.settings.btn2_link }}">{{ section.settings.btn2 }}</a>{% endif %}</div>
   </div>
 </section>
 {% schema %}

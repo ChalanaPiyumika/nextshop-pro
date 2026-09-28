@@ -98,6 +98,9 @@ p { margin: 0 0 1em; }
 .btn--outline-light { background: transparent; border-color: rgba(250, 247, 241, 0.8); color: var(--color-bone); }
 .btn--outline-light:hover { background: var(--color-bone); color: var(--color-ink); }
 
+.btn--earth { background: #b0977a; border-color: #b0977a; color: #fff; }
+.btn--earth:hover { background: transparent; color: #b0977a; }
+
 .btn[disabled] { opacity: 0.45; cursor: not-allowed; }
 
 .text-link {
@@ -146,20 +149,20 @@ p { margin: 0 0 1em; }
   max-width: var(--page-width);
   margin: 0 auto;
 }
-.site-header__nav { display: flex; gap: 28px; }
+.site-header__nav { display: flex; gap: 28px; justify-content: center; }
 .site-header__nav a {
-  font-size: 0.76rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  opacity: 0.85;
+  font-size: 0.95rem;
+  opacity: 0.75;
   transition: opacity 0.2s ease;
 }
-.site-header__nav a:hover { opacity: 1; }
+.site-header__nav a:hover,
+.site-header__nav a[aria-current="page"] { opacity: 1; }
+.site-header__nav a[aria-current="page"] { font-weight: 600; }
 .site-header__logo {
   font-family: var(--font-display);
   font-size: 1.35rem;
   letter-spacing: 0.04em;
-  text-align: center;
+  text-align: left;
   white-space: nowrap;
 }
 .site-header__icons {
@@ -199,7 +202,7 @@ p { margin: 0 0 1em; }
   display: flex;
   align-items: flex-end;
   min-height: 92vh;
-  color: var(--color-bone);
+  color: var(--color-ink);
   overflow: hidden;
 }
 .hero__media, .hero__media img {
@@ -715,7 +718,7 @@ body.cart-open .cart-drawer { transform: translateX(0); }
 .site-header--sticky { position: sticky; top: 0; }
 .template-index .announcement-bar + .shopify-section .site-header--overlay,
 .template-index .site-header--overlay { top: 35px; }
-.site-header__icons svg { width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 1.5; }
+.site-header__icons svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.2; }
 .site-header__logo img { display: block; width: auto; max-height: 52px; }
 .mobile-menu { display: none; }
 .mobile-menu summary { list-style: none; cursor: pointer; }
