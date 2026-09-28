@@ -6,9 +6,11 @@
   {% if page_description %}<meta name="description" content="{{ page_description | escape }}">{% endif %}
   {% if settings.favicon %}<link rel="icon" href="{{ settings.favicon | image_url: width: 64 }}">{% endif %}
   <link rel="canonical" href="{{ canonical_url }}">
-  {{ settings.heading_font | font_face: font_display: 'swap' }}
-  {{ settings.body_font | font_face: font_display: 'swap' }}
-  <style>:root{--color-bone:{{ settings.color_background }};--color-ink:{{ settings.color_text }};--color-earth:{{ settings.color_accent }};--color-line:{{ settings.color_muted }};--font-display:{{ settings.heading_font.family }},{{ settings.heading_font.fallback_families }};--font-body:{{ settings.body_font.family }},{{ settings.body_font.fallback_families }};--page-width:{{ settings.page_width }}px}</style>
+  <style>
+    {{ settings.heading_font | font_face: font_display: 'swap' }}
+    {{ settings.body_font | font_face: font_display: 'swap' }}
+    :root{--color-bone:{{ settings.color_background }};--color-ink:{{ settings.color_text }};--color-earth:{{ settings.color_accent }};--color-line:{{ settings.color_muted }};--font-display:{{ settings.heading_font.family }},{{ settings.heading_font.fallback_families }};--font-body:{{ settings.body_font.family }},{{ settings.body_font.fallback_families }};--page-width:{{ settings.page_width }}px}
+  </style>
   {{ 'base.css' | asset_url | stylesheet_tag }}
   {{ content_for_header }}
 </head>
